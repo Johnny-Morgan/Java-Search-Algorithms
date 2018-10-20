@@ -66,6 +66,28 @@ public class SearchAlgorithms {
     }
 
 
+    public static void bubbleSort(int[] pArray) {
+        printArray(pArray);
+        boolean exchangeMade;
+        int last = pArray.length - 1;
+        int temp;
+
+        do {
+            exchangeMade = false;
+            for (int loop = 0; loop < last; loop++) {
+                if (pArray[loop] > pArray[loop + 1]) {
+                    temp = pArray[loop];
+                    pArray[loop] = pArray[loop + 1];
+                    pArray[loop + 1] = temp;
+                    exchangeMade = true;
+                }
+            }
+            last = last - 1;
+        } while ((exchangeMade) && (last >= 1));
+        printArray(pArray);
+    }
+
+
     public static void main(String[] args) {
 
         Scanner keyboard = new Scanner(System.in);
@@ -108,5 +130,10 @@ public class SearchAlgorithms {
         System.out.println("The average number of linear searches is " + df.format((double)countLinear / noOfSearches));
         System.out.println("The average number of binary searches is " + df.format((double)countBinary / noOfSearches));
 
+        // Test bubble sort method
+        System.out.println("\n******************");
+        System.out.println("TESTING bubble sort method");
+        int[]newArray = {200,63,1,74,34,86};
+        bubbleSort(newArray);
     }
 }
