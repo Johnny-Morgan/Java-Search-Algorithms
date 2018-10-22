@@ -16,6 +16,14 @@ public class SearchAlgorithms {
         System.out.println("]");
     }
 
+    // Method to generate a random array
+    public static int[] generateRandomArray(int[] pArray) {
+        for (int index = 0; index < pArray.length; index++) {
+            pArray[index] = (int) ((Math.random() * 100) + 1);
+        }
+        return pArray;
+    }
+
     // Method to generate a random ascending array
     public static void generateRandomAscendingArray(int[] pArray) {
         pArray[0] = (int) ((Math.random() * 5) + 1);
@@ -87,6 +95,25 @@ public class SearchAlgorithms {
         printArray(pArray);
     }
 
+    public static void selectionSort(int[] pArray) {
+        int size = pArray.length - 1;
+        int minPos, minValue;
+
+        for (int pass = 0; pass < size; pass++) {
+            minValue = pArray[pass];
+            minPos = pass;
+            for (int location = pass + 1; location <= size; location++) {
+                if (pArray[location] < minValue) {
+                    minValue = pArray[location];
+                    minPos = location;
+                }
+            }
+            pArray[minPos] = pArray[pass];
+            pArray[pass] = minValue;
+
+        }
+        printArray(pArray);
+    }
 
     public static void main(String[] args) {
 
@@ -135,5 +162,11 @@ public class SearchAlgorithms {
         System.out.println("TESTING bubble sort method");
         int[]newArray = {200,63,1,74,34,86};
         bubbleSort(newArray);
+
+        // Test slection sort method
+        System.out.println("\n******************");
+        System.out.println("TESTING selection sort method");
+        selectionSort(newArray);
+
     }
 }
