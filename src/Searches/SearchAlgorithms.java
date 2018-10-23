@@ -115,6 +115,20 @@ public class SearchAlgorithms {
         printArray(pArray);
     }
 
+    public static void insertionSort(int[] pArray) {
+        int saved, mover;
+        for (int pos = 1; pos < pArray.length; pos++) {
+            saved = pArray[pos];
+            mover = pos;
+            while ((mover > 0) && (saved < pArray[mover - 1])) {
+                pArray[mover] = pArray[mover - 1];
+                mover--;
+            }
+            pArray[mover] = saved;
+
+        }printArray(pArray);
+    }
+
     public static void main(String[] args) {
 
         Scanner keyboard = new Scanner(System.in);
@@ -160,13 +174,20 @@ public class SearchAlgorithms {
         // Test bubble sort method
         System.out.println("\n******************");
         System.out.println("TESTING bubble sort method");
-        int[]newArray = {200,63,1,74,34,86};
-        bubbleSort(newArray);
+        int[]newArray1 = {200,63,1,74,34,86};
+        bubbleSort(newArray1);
 
         // Test slection sort method
+        int[]newArray2 = {87,45,2,34,121,86};
         System.out.println("\n******************");
         System.out.println("TESTING selection sort method");
-        selectionSort(newArray);
+        selectionSort(newArray2);
+
+        // Test insertion sort method
+        int[]newArray3 = {345,45,6,38,11,86};
+        System.out.println("\n******************");
+        System.out.println("TESTING insertion sort method");
+        insertionSort(newArray3);
 
     }
 }
