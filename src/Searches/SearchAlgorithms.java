@@ -49,6 +49,8 @@ public class SearchAlgorithms {
         return countLoop;
     }
 
+
+
     // BINARY search method
     public static int binarySearch(int[] pArray, int pTarget) {
         int bottom = 0;
@@ -140,6 +142,26 @@ public class SearchAlgorithms {
         int countLinear = 0;
         int countBinary = 0;
 
+        System.out.println("Welcome");
+        System.out.println("Do you wish to search an array or sort an array:");
+        System.out.println("\t1\tSearch");
+        System.out.println("\t2\tSort");
+        System.out.print("Please enter 1 or 2: ");
+        int searchOrSort = keyboard.nextInt();
+
+        if(searchOrSort == 1){
+            System.out.println("You have chosen to search an array");
+            System.out.println("Do you wish to search an ordered or unordered array:");
+            System.out.println("\t1\tOrdered");
+            System.out.println("\t2\tUnordered");
+            System.out.print("Please enter 1 or 2: ");
+            int orderedOrUnordered = keyboard.nextInt();
+            if(orderedOrUnordered == 1){
+                System.out.println("You have chosen to search an ordered array");
+            }
+
+        }
+
         // prompt user for array size
         System.out.print("Enter array size: ");
         arraySize = keyboard.nextInt();
@@ -171,23 +193,47 @@ public class SearchAlgorithms {
         System.out.println("The average number of linear searches is " + df.format((double)countLinear / noOfSearches));
         System.out.println("The average number of binary searches is " + df.format((double)countBinary / noOfSearches));
 
-        // Test bubble sort method
-        System.out.println("\n******************");
-        System.out.println("TESTING bubble sort method");
-        int[]newArray1 = {200,63,1,74,34,86};
-        bubbleSort(newArray1);
+        generateRandomArray(myArray);
+        printArray(myArray);
 
-        // Test slection sort method
-        int[]newArray2 = {87,45,2,34,121,86};
-        System.out.println("\n******************");
-        System.out.println("TESTING selection sort method");
-        selectionSort(newArray2);
 
-        // Test insertion sort method
-        int[]newArray3 = {345,45,6,38,11,86};
-        System.out.println("\n******************");
-        System.out.println("TESTING insertion sort method");
-        insertionSort(newArray3);
+        int selection;
+        String answer = "YES";
+
+
+        do {
+            System.out.println("MENU");
+            System.out.println("Your SORTING options are as follows:");
+            System.out.println("\t1\tSelection");
+            System.out.println("\t2\tBubble");
+            System.out.println("\t3\tInsertion");
+            System.out.println("\t4\tExit Program");
+            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3 or 4): ");
+
+            selection = keyboard.nextInt();
+
+            switch (selection) {
+                case 1:
+                    System.out.println("\nYou have chosen Selection Sorting.");
+                    selectionSort(myArray);
+                    break;
+                case 2:
+                    System.out.println("\nYou have chosen Bubble Sorting.");
+                    bubbleSort(myArray);
+                    break;
+                case 3:
+                    System.out.println("\nYou have chosen Insertion Sorting.");
+                    insertionSort(myArray);
+                    break;
+                case 4:
+                    System.out.println("\nExit Program");
+                    break;
+                default:
+                    System.out.println("\nInvalid entry, try again.");
+                    System.out.println();
+            }
+        } while (selection != 4);
+
 
     }
 }
