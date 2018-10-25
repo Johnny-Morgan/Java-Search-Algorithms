@@ -8,6 +8,8 @@ import java.util.Scanner;
  * COMMENTS ABOUT THE PROGRAM GO HERE
  */
 public class SearchAlgorithms {
+     static Scanner keyboard = new Scanner(System.in);
+
     // Method to print out an array
     public static void printArray(int[] pArray) {
         System.out.print("[ ");
@@ -77,10 +79,11 @@ public class SearchAlgorithms {
 
 
     public static void bubbleSort(int[] pArray) {
-        printArray(pArray);
+
         boolean exchangeMade;
         int last = pArray.length - 1;
         int temp;
+        int iterations = 0;
 
         do {
             exchangeMade = false;
@@ -93,8 +96,13 @@ public class SearchAlgorithms {
                 }
             }
             last = last - 1;
+            iterations++;
+
         } while ((exchangeMade) && (last >= 1));
+        System.out.println("Bubble sorted array:");
         printArray(pArray);
+        System.out.println("It took " + iterations + " iterations to sort this array\n");
+
     }
 
     public static void selectionSort(int[] pArray) {
@@ -131,6 +139,45 @@ public class SearchAlgorithms {
         }printArray(pArray);
     }
 
+    public static void menu(int[]array){
+
+        int selection;
+
+        do {
+            System.out.println("MENU");
+            System.out.println("Your SORTING options are as follows:");
+            System.out.println("\t1\tSelection");
+            System.out.println("\t2\tBubble");
+            System.out.println("\t3\tInsertion");
+            System.out.println("\t4\tExit Program");
+            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3 or 4): ");
+
+            selection = keyboard.nextInt();
+
+            switch (selection) {
+                case 1:
+                    System.out.println("\nYou have chosen Selection Sorting.");
+                    selectionSort(array);
+                    break;
+                case 2:
+                    System.out.println("\nYou have chosen Bubble Sorting.");
+                    bubbleSort(array);
+                    break;
+                case 3:
+                    System.out.println("\nYou have chosen Insertion Sorting.");
+                    insertionSort(array);
+                    break;
+                case 4:
+                    System.out.println("\nExit Program");
+                    break;
+                default:
+                    System.out.println("\nInvalid entry, try again.");
+                    System.out.println();
+            }
+        } while (selection != 4);
+
+    }
+
     public static void main(String[] args) {
 
         Scanner keyboard = new Scanner(System.in);
@@ -159,81 +206,46 @@ public class SearchAlgorithms {
             if(orderedOrUnordered == 1){
                 System.out.println("You have chosen to search an ordered array");
             }
+        }else {
+            System.out.println("\nYou have chosen to sort an array");
+            // prompt user for array size
+            System.out.print("\nEnter array size: ");
+            arraySize = keyboard.nextInt();
 
+            int[] myArray = new int[arraySize];
+
+            // generate and print out array
+            generateRandomArray(myArray);
+            System.out.println();
+            printArray(myArray);
+            menu(myArray);
         }
 
-        // prompt user for array size
-        System.out.print("Enter array size: ");
-        arraySize = keyboard.nextInt();
-
-        int[] myArray = new int[arraySize];
-
-        // generate and print out array
-        generateRandomAscendingArray(myArray);
-        printArray(myArray);
-
-        // prompt user for amount of searches
-        System.out.println();
-        System.out.print("How many searches do you require: ");
-        noOfSearches = keyboard.nextInt();
-        System.out.println();
-
-        for (int search = 1; search <= noOfSearches; search++) {
-            targetIndex = ((int) ((Math.random() * arraySize) + 1)) - 1;
-            System.out.println("Search no." + search);
-            System.out.println("The target value is " + myArray[targetIndex]);
-            System.out.println("The target is at index " + targetIndex + " in the array");
-            countLinear += linearSearch(myArray, targetIndex);
-            countBinary += binarySearch(myArray, targetIndex);
-            System.out.println();
-            System.out.println("**********************************************");
-            System.out.println();
-        }
-
-        System.out.println("The average number of linear searches is " + df.format((double)countLinear / noOfSearches));
-        System.out.println("The average number of binary searches is " + df.format((double)countBinary / noOfSearches));
-
-        generateRandomArray(myArray);
-        printArray(myArray);
 
 
-        int selection;
-        String answer = "YES";
-
-
-        do {
-            System.out.println("MENU");
-            System.out.println("Your SORTING options are as follows:");
-            System.out.println("\t1\tSelection");
-            System.out.println("\t2\tBubble");
-            System.out.println("\t3\tInsertion");
-            System.out.println("\t4\tExit Program");
-            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3 or 4): ");
-
-            selection = keyboard.nextInt();
-
-            switch (selection) {
-                case 1:
-                    System.out.println("\nYou have chosen Selection Sorting.");
-                    selectionSort(myArray);
-                    break;
-                case 2:
-                    System.out.println("\nYou have chosen Bubble Sorting.");
-                    bubbleSort(myArray);
-                    break;
-                case 3:
-                    System.out.println("\nYou have chosen Insertion Sorting.");
-                    insertionSort(myArray);
-                    break;
-                case 4:
-                    System.out.println("\nExit Program");
-                    break;
-                default:
-                    System.out.println("\nInvalid entry, try again.");
-                    System.out.println();
-            }
-        } while (selection != 4);
-
+//        // prompt user for amount of searches
+//        System.out.println();
+//        System.out.print("How many searches do you require: ");
+//        noOfSearches = keyboard.nextInt();
+//        System.out.println();
+//
+//        for (int search = 1; search <= noOfSearches; search++) {
+//            targetIndex = ((int) ((Math.random() * arraySize) + 1)) - 1;
+//            System.out.println("Search no." + search);
+//            System.out.println("The target value is " + myArray[targetIndex]);
+//            System.out.println("The target is at index " + targetIndex + " in the array");
+//            countLinear += linearSearch(myArray, targetIndex);
+//            countBinary += binarySearch(myArray, targetIndex);
+//            System.out.println();
+//            System.out.println("**********************************************");
+//            System.out.println();
+//        }
+//
+//        System.out.println("The average number of linear searches is " + df.format((double)countLinear / noOfSearches));
+//        System.out.println("The average number of binary searches is " + df.format((double)countBinary / noOfSearches));
+//
+//        generateRandomArray(myArray);
+//        printArray(myArray);
 
     }
 }
