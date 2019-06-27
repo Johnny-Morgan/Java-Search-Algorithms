@@ -108,6 +108,7 @@ public class SearchAlgorithms {
     public static void selectionSort(int[] pArray) {
         int size = pArray.length - 1;
         int minPos, minValue;
+        int iterations = 0;
 
         for (int pass = 0; pass < size; pass++) {
             minValue = pArray[pass];
@@ -117,12 +118,17 @@ public class SearchAlgorithms {
                     minValue = pArray[location];
                     minPos = location;
                 }
+
             }
             pArray[minPos] = pArray[pass];
             pArray[pass] = minValue;
+            iterations++;
+
 
         }
+        System.out.println("Insertion sorted array:");
         printArray(pArray);
+        System.out.println("It took " + iterations + " iterations to sort this array\n");
     }
 
     public static void insertionSort(int[] pArray) {
@@ -139,44 +145,79 @@ public class SearchAlgorithms {
         }printArray(pArray);
     }
 
-    public static void menu(int[]array){
+    public static void shellSort(int[] pArray) {
+        for(int gap = pArray.length / 2; gap > 0; gap /= 2){
+
+            for(int i = gap; i < pArray.length; i++){
+                int newElement = pArray[i];
+                int j = i;
+                while(j >= gap && pArray[j - gap] > newElement){
+                    pArray[j] = pArray[j - gap];
+                    j -= gap;
+                }
+                pArray[j] = newElement;
+            }
+        }printArray(pArray);
+    }
+
+    public static void menu(){
 
         int selection;
 
         do {
-            System.out.println("MENU");
+            System.out.println("\nMENU");
             System.out.println("Your SORTING options are as follows:");
             System.out.println("\t1\tSelection");
             System.out.println("\t2\tBubble");
             System.out.println("\t3\tInsertion");
-            System.out.println("\t4\tExit Program");
-            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3 or 4): ");
+            System.out.println("\t4\tShell");
+            System.out.println("\t5\tExit Program");
+            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3, 4 or 5): ");
 
             selection = keyboard.nextInt();
 
             switch (selection) {
                 case 1:
                     System.out.println("\nYou have chosen Selection Sorting.");
-                    selectionSort(array);
+                    selectionSort(arraySize());
                     break;
                 case 2:
                     System.out.println("\nYou have chosen Bubble Sorting.");
-                    bubbleSort(array);
+                    bubbleSort(arraySize());
                     break;
                 case 3:
                     System.out.println("\nYou have chosen Insertion Sorting.");
-                    insertionSort(array);
+                    insertionSort(arraySize());
                     break;
                 case 4:
+                    System.out.println("\nYou have chosen Shell Sorting.");
+                    shellSort(arraySize());
+                    break;
+                case 5:
                     System.out.println("\nExit Program");
                     break;
                 default:
                     System.out.println("\nInvalid entry, try again.");
                     System.out.println();
             }
-        } while (selection != 4);
-
+        } while (selection != 5);
     }
+
+    public static int[] arraySize(){
+        System.out.print("\nEnter array size: ");
+        int arraySize = keyboard.nextInt();
+
+        int[] myArray = new int[arraySize];
+
+        // generate and print out array
+        generateRandomArray(myArray);
+        System.out.println();
+        printArray(myArray);
+        System.out.println();
+
+        return myArray;
+    }
+
 
     public static void main(String[] args) {
 
@@ -208,17 +249,7 @@ public class SearchAlgorithms {
             }
         }else {
             System.out.println("\nYou have chosen to sort an array");
-            // prompt user for array size
-            System.out.print("\nEnter array size: ");
-            arraySize = keyboard.nextInt();
-
-            int[] myArray = new int[arraySize];
-
-            // generate and print out array
-            generateRandomArray(myArray);
-            System.out.println();
-            printArray(myArray);
-            menu(myArray);
+            menu();
         }
 
 
