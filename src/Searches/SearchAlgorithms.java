@@ -160,6 +160,71 @@ public class SearchAlgorithms {
         }printArray(pArray);
     }
 
+    public static int[] mergeSort(int[] input, int start, int end) {
+
+        if(end - start < 2)
+            return input;
+
+        int mid = (start + end) / 2;
+        mergeSort(input, start, mid);
+        mergeSort(input, mid, end);
+        merge(input, start, mid, end);
+        return input;
+    }
+
+    public static void merge(int[] input, int start, int mid, int end) {
+
+        if(input[mid - 1] <= input[mid])
+            return;
+
+        int i = start;
+        int j = mid;
+        int tempIndex = 0;
+
+        int[] temp = new int[end - start];
+        while(i < mid && j < end) {
+            temp[tempIndex++] = input[i] <= input[j] ? input[i++] : input[j++];
+        }
+        System.arraycopy(input, i, input, start + tempIndex, mid - i);
+        System.arraycopy(temp, 0, input, start, tempIndex);
+
+    }
+
+    public static void quickSort(int[] input, int start, int end) {
+        if(end - start < 2) {
+            return;
+        }
+
+        int  pivotIndex = partition(input, start, end);
+        quickSort(input, start, pivotIndex);
+        quickSort(input, pivotIndex + 1, end);
+    }
+
+    public static int partition(int[] input, int start, int end) {
+
+        int pivot = input[start];
+        int i = start;
+        int j = end;
+
+        while(i < j) {
+            while(i < j && input[--j] >= pivot) {
+                if(i < j) {
+                    input[i] = input[j];
+                }
+            }
+
+            while(i < j && input[++i] <= pivot) {
+                if(i < j) {
+                    input[j] = input[i];
+                }
+            }
+        }
+
+        input[j] = pivot;
+        return j;
+
+    }
+
     public static void menu(){
 
         int selection;
@@ -171,8 +236,9 @@ public class SearchAlgorithms {
             System.out.println("\t2\tBubble");
             System.out.println("\t3\tInsertion");
             System.out.println("\t4\tShell");
-            System.out.println("\t5\tExit Program");
-            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3, 4 or 5): ");
+            System.out.println("\t5\tMerge");
+            System.out.println("\t6\tExit Program");
+            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3, 4, 5 or 6): ");
 
             selection = keyboard.nextInt();
 
@@ -194,18 +260,24 @@ public class SearchAlgorithms {
                     shellSort(arraySize());
                     break;
                 case 5:
+                    System.out.println("\nYou have chosen Merge Sorting.");
+                    printArray(mergeSort(arraySize(), 0, arraySize));
+                    break;
+                case 6:
                     System.out.println("\nExit Program");
                     break;
                 default:
                     System.out.println("\nInvalid entry, try again.");
                     System.out.println();
             }
-        } while (selection != 5);
+        } while (selection != 6);
     }
 
+    static int arraySize;
     public static int[] arraySize(){
         System.out.print("\nEnter array size: ");
-        int arraySize = keyboard.nextInt();
+
+        arraySize = keyboard.nextInt();
 
         int[] myArray = new int[arraySize];
 
