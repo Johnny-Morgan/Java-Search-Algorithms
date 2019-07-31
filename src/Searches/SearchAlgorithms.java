@@ -190,14 +190,15 @@ public class SearchAlgorithms {
 
     }
 
-    public static void quickSort(int[] input, int start, int end) {
+    public static int[] quickSort(int[] input, int start, int end) {
         if(end - start < 2) {
-            return;
+            return input;
         }
 
         int  pivotIndex = partition(input, start, end);
         quickSort(input, start, pivotIndex);
         quickSort(input, pivotIndex + 1, end);
+        return input;
     }
 
     public static int partition(int[] input, int start, int end) {
@@ -237,8 +238,9 @@ public class SearchAlgorithms {
             System.out.println("\t3\tInsertion");
             System.out.println("\t4\tShell");
             System.out.println("\t5\tMerge");
-            System.out.println("\t6\tExit Program");
-            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3, 4, 5 or 6): ");
+            System.out.println("\t6\tQuick");
+            System.out.println("\t7\tExit Program");
+            System.out.print("Please select your preferred sorting technique (enter 1, 2, 3, 4, 5, 6 or 7): ");
 
             selection = keyboard.nextInt();
 
@@ -264,13 +266,17 @@ public class SearchAlgorithms {
                     printArray(mergeSort(arraySize(), 0, arraySize));
                     break;
                 case 6:
+                    System.out.println("\nYou have chosen Quick Sorting.");
+                    printArray(quickSort(arraySize(), 0, arraySize));
+                    break;
+                case 7:
                     System.out.println("\nExit Program");
                     break;
                 default:
                     System.out.println("\nInvalid entry, try again.");
                     System.out.println();
             }
-        } while (selection != 6);
+        } while (selection != 7);
     }
 
     static int arraySize;
