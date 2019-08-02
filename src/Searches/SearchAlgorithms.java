@@ -208,17 +208,17 @@ public class SearchAlgorithms {
         int j = end;
 
         while(i < j) {
-            while(i < j && input[--j] >= pivot) {
-                if(i < j) {
-                    input[i] = input[j];
-                }
+            while(i < j && input[--j] >= pivot);
+            if(i < j) {
+                input[i] = input[j];
             }
+            
 
-            while(i < j && input[++i] <= pivot) {
-                if(i < j) {
-                    input[j] = input[i];
-                }
+            while(i < j && input[++i] <= pivot);
+            if(i < j) {
+                input[j] = input[i];
             }
+            
         }
 
         input[j] = pivot;
